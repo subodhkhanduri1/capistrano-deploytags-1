@@ -30,7 +30,7 @@ namespace :deploy do
   end
 
   desc 'add git tags for each successful deployment'
-  after (fetch(:task_to_tag_after) || 'cleanup').to_sym, :tagdeploy do
+  before (fetch(:task_to_tag_after) || 'cleanup').to_sym, :tagdeploy do
     run_locally do
       if ENV['NO_DEPLOYTAGS'] || fetch(:no_deploytags, false)
         info "[deploytags] Skipping deploytags"
